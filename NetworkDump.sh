@@ -20,4 +20,23 @@ echo "Network Information Dump $date" | tee -a "$output"
 
 #IP address information
 format "IP Info"
-ip addr | tee -a 
+ip addr | tee -a "$output"
+
+#DNS server information
+format "DNS Server"
+cat /etc/resolv.conf | tee -a "$output"
+
+#Identify open ports
+format "Listening Ports"
+ss -tuln | tee -a "$output"
+
+#Routing table information
+format "Routing Table"
+route -n | tee -a "$output"
+
+#NetworkManager Information
+format "NetworkManager"
+nmcli device show | tee -a "$output"
+
+echo 
+echo "Wonderful"
